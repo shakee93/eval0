@@ -1,0 +1,43 @@
+# Source
+src/
+tests/
+examples/
+__tests__/
+
+# Config files
+.github/
+.vscode/
+.idea/
+.env*
+.eslintrc*
+.prettierrc*
+.editorconfig
+jest.config.*
+tsconfig.*
+*.tsbuildinfo
+
+# Documentation and assets
+docs/
+assets/
+*.md
+!README.md
+
+# Development files
+coverage/
+.nyc_output/
+*.test.*
+*.spec.*
+
+# Git files
+.git/
+.gitignore
+
+# Logs and temp files
+logs/
+*.log
+tmp/
+temp/
+
+# Cache
+.cache/
+.npm/ 

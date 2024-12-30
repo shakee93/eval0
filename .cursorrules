@@ -1,0 +1,127 @@
+## About the Eval0 project. This is the Typescript SDK for Eval0.
+
+Eval0 - One line AI for your Applications
+eval0.dev
+
+**Eval0** is a lightweight SaaS API that tackles quick, everyday computing and AI-driven tasks—by simply calling a single function, `eval0(query)`. Whether you need to validate user input, classify content, perform short calculations, or generate micro-summaries, Eval0 offers straightforward, **1–5 word responses** that developers can seamlessly integrate into any project.
+
+---
+
+### **Why Eval0?**
+
+Modern applications demand **quick, on-the-fly answers** to common questions. Rather than spinning up large, complex AI models or juggling multiple libraries, Eval0’s minimalistic approach ensures:
+
+1. **Simplicity** – A single function call for all tasks.
+2. **Speed** – Low-latency API responses optimized for real-time applications.
+3. **Versatility** – Handles numerous everyday checks, short classifications, micro-summaries, and more.
+
+---
+
+### **Core Features**
+
+1. **Unified Function Call**
+    
+    - **One** consistent function, `eval0(...)`, across Python, JavaScript, Java, PHP, C#, and more.
+    - Simplified codebase—no extra layers or complex setups needed.
+2. **AI-Driven Intelligence**
+    
+    - **Natural Language Understanding**: Handles ambiguous questions gracefully (“Is this text sarcastic?”).
+    - **Context-Aware**: Goes beyond simple regex checks—Eval0 can assess content tone, context, or urgency.
+3. **SDKs and Documentation**
+    
+    - Pre-packaged **SDKs** in multiple languages.
+    - Clear documentation with quick examples, making setup practically plug-and-play.
+4. **Concise Responses**
+    
+    - **1 to 5 words** ensures your application stays clutter-free.
+    - Perfect for chatbots, mobile apps, or any interface needing fast, minimal output.
+
+---
+
+### **Example Use Cases**
+
+1. **Validation**
+    
+    ```python
+    result = eval0("Is this a valid URL?", "http://example.com")
+    # Returns: "Yes"
+    ```
+    
+    - Quickly check URL, email, or phone number validity in sign-up forms.
+2. **Short Classification**
+    
+    ```python
+    result = eval0("Is this sentence positive or negative?", "I absolutely love this movie!")
+    # Returns: "Positive"
+    ```
+    
+    - Gauge sentiment or tone with minimal overhead.
+3. **Micro-Summarization**
+    
+    ```python
+    result = eval0("Summarize in 5 words:", "Blockchain technology will revolutionize finance globally.")
+    # Returns: "Blockchain revolutionizes global finance."
+    ```
+    
+    - Provide condensed ideas for content previews or headlines.
+4. **Mini Fact Check**
+    
+    ```python
+    result = eval0("Is this fact true or false?", "The Earth is flat.")
+    # Returns: "False"
+    ```
+    
+    - Offer quick factual checks in a knowledge base or FAQ section.
+5. **Topic Tagging**
+    
+    ```python
+    result = eval0("Tag this product:", "Apple Macbook Pro 16inch")
+    # Returns: "Laptop"
+    ```
+    
+    - Effortlessly categorize products, blog posts, or messages.
+
+---
+
+### **Who Benefits?**
+
+- **Startups and Small Teams**  
+    Save time and resources by offloading tasks you’d otherwise manually code or train a model for.
+- **Mid-Sized Enterprises**  
+    Standardize input validations and micro-AI tasks across teams without building from scratch.
+- **Large Organizations**  
+    Offload simpler tasks to keep your internal AI resources free for complex projects.
+
+---
+
+### **How Does It Work?**
+
+1. **Sign Up** for an Eval0 account and receive your API key.
+2. **Install** the appropriate **SDK** or make direct REST calls if you prefer.
+3. **Call** `eval0(query, data...)` with the question or instruction, plus any input strings or numbers.
+4. Receive a **1–5 word** answer—fast, clean, and ready to use.
+
+---
+
+### **Potential and Roadmap**
+
+- **Scalable Infrastructure**: With rising API calls, Eval0’s backend can handle millions of requests without downtime.
+- **Advanced Models**: Future plans include domain-specific expansions (legal checks, medical disclaimers, financial fact-checking) for specialized needs.
+- **Customizable Output**: Paid tiers could allow advanced parameters like output confidence scores or multilingual responses.
+
+---
+
+### **Conclusion**
+
+Eval0 is **the “just works” approach** to quick AI-driven evaluations, calculations, and validations. By stripping away complexities and funneling it all into one reliable, **easy-to-integrate function**, Eval0 aims to **maximize developer productivity** and **minimize overhead**.
+
+**Try Eval0** and start evaluating anything with **one line of code**—it’s that simple!
+
+## How I like the Eval0 npm package to be structured
+
+```
+import { eval0 } from "eval0";
+import { eval0 } from "eval0/stream";
+```
+
+this is how I like the Eval0 npm package to be called in my projects. Internally to start we will use Vercel AI SDK to run the eval0 function. We will use OPENAI_API_KEY to call the OPENAI API.
