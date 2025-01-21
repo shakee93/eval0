@@ -29,23 +29,37 @@ pnpm add eval0
 
 ### One-Liners ⚡️
 
+
+Create a concise title for a chat message
 ```typescript
 import { eval0 } from 'eval0';
 
-
-// Create a concise title for a chat message
 const { value: title } = await eval0('Concise title for this message:', 'Hello, how can I help you today?');
 console.log(title); // "Hello, how can I help?"
+```
 
-// Quick classifications (returns string)
+
+Quick classifications (returns string)
+```typescript
 const { value: sentiment } = await eval0('positive or negative?', 'I love it!');
-console.log(sentiment); // "positive"
 
-// Fast summaries (returns string)
+console.log(sentiment); // "positive"
+```
+
+
+Fast summaries (returns string)
+```typescript
 const content = 'The quick brown fox jumps over the lazy dog';
 const { value: summary } = await eval0('Summarize in one word', content);
 
 console.log(summary); // "agility"
+```
+
+Quick content moderation (returns boolean)
+```typescript
+const { value: isSafe } = await eval0('Is this message safe for kids?', 'Let\'s play minecraft!');
+
+console.log(isSafe); // "true"
 ```
 
 ### Advanced Usage with Schemas 🔒
