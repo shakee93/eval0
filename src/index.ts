@@ -66,7 +66,7 @@ export async function eval0<T extends z.ZodType>(
             ? `${config.query}\nInput: ${JSON.stringify(config.input)}`
             : config.query;
 
-        
+
         const result = await generateObject({
             model: openai(config.model || DEFAULT_CONFIG.model),
             system: 'You are a concise AI assistant. Provide direct, brief answers, preferably in 1-5 words. use developer when answering. example return "true" instead of "yes"',

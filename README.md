@@ -1,6 +1,6 @@
 # Eval0
 
-> One line AI for your Applications
+> Ship faster with micro-AI in one line
 
 [![npm version](https://badge.fury.io/js/eval0.svg)](https://badge.fury.io/js/eval0)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -171,7 +171,7 @@ interface Eval0Response<T> {
     value: T;              // The typed response value based on schema
     metadata: {
         model: string;     // OpenAI model used (e.g., 'gpt-4o-mini')
-        tokens: number;    // Total tokens consumed
+        usage: any;    // Token usage returned by VERCEL AI SDK
         latency: number;   // Response time in milliseconds
         ai_sdk: any;      // Raw AI SDK response data
     };
