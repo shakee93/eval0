@@ -66,30 +66,33 @@ export async function eval0<T extends z.ZodType>(
             ? `${config.query}\nInput: ${JSON.stringify(config.input)}`
             : config.query;
 
+        
         const result = await generateObject({
             model: openai(config.model || DEFAULT_CONFIG.model),
             system: 'You are a concise AI assistant. Provide direct, brief answers, preferably in 1-5 words. use developer when answering. example return "true" instead of "yes"',
             prompt,
             schema: z.object({
-                value: config.schema
+                value: config.schema || z.any()
             }),
             maxTokens: config.maxTokens || DEFAULT_CONFIG.maxTokens,
         });
 
-        if (!result.object?.value) {
+        if (result.object?.value === undefined) {
             throw new Eval0Error('Failed to get value from API');
         }
+
 
         return {
             value: result.object.value as Infer<T>,
             metadata: {
                 model: config.model || DEFAULT_CONFIG.model,
-                tokens: result.usage?.totalTokens || 0,
+                usage: result.usage,
                 latency: Date.now() - startTime,
                 ai_sdk: result
             }
         };
     } catch (error: any) {
+        console.error(error);
         throw new Eval0Error(error.message || 'Failed to process request');
     }
 }

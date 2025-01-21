@@ -59,10 +59,10 @@ export async function* eval0(
     try {
         const stream = await streamObject({
             model: openai(config.model || DEFAULT_CONFIG.model),
-            system: 'You are a concise AI assistant. Provide direct, brief answers, preferably in 1-5 words. use developer when answering. example return "true" instead of "yes"',
+            system: 'You are Eval0, a concise AI assistant. Provide direct, brief answers, preferably in 1-5 words. be dev friendly. example return "true" instead of "yes"',
             prompt,
             schema: z.object({
-                value: config.schema
+                value: config.schema || z.any()
             }),
             maxTokens: config.maxTokens || DEFAULT_CONFIG.maxTokens,
             temperature: config.temperature || DEFAULT_CONFIG.temperature,

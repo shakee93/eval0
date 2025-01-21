@@ -1,3 +1,4 @@
+import { LanguageModelUsage, GenerateObjectResult, } from 'ai';
 import { z } from 'zod';
 
 // Base configuration options
@@ -16,7 +17,7 @@ export type Infer<T> = T extends z.ZodType<infer U> ? U : never;
 export interface Eval0Options<T extends z.ZodType> extends Omit<Eval0Config, 'schema'> {
     query: string;
     input?: unknown;
-    schema: T;
+    schema?: T;
 }
 
 // Response type
@@ -24,7 +25,7 @@ export interface Eval0Response<T> {
     value: T;
     metadata: {
         model: string;
-        tokens: number;
+        usage: LanguageModelUsage;
         latency: number;
         ai_sdk: any;
     };

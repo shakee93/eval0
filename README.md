@@ -11,8 +11,7 @@ Eval0 is a lightweight TypeScript SDK that provides instant AI-powered evaluatio
 
 - 🚀 **Simple API** - One function for all your AI needs
 - 🔒 **Type-Safe** - Built-in TypeScript support with Zod schemas
-- 🌊 **Streaming Support** - Real-time responses with streaming API
-- 🎯 **Concise Responses** - Optimized for 1-5 word answers
+- 🌊 **Concise Responses** - Optimized for 1-5 word answers
 - 🛠 **Flexible Input** - Multiple function signatures for convenience
 - 📦 **Zero Config** - Works out of the box with sensible defaults
 
@@ -33,23 +32,20 @@ pnpm add eval0
 ```typescript
 import { eval0 } from 'eval0';
 
-// Simple validations (returns boolean)
-const { value } = await eval0('Is this a valid email?', 'user@example.com');
-console.log(value); // true
+
+// Create a concise title for a chat message
+const { value: title } = await eval0('Concise title for this message:', 'Hello, how can I help you today?');
+console.log(title); // "Hello, how can I help?"
 
 // Quick classifications (returns string)
-const { value: sentiment } = await eval0('Is this positive or negative?', 'I love it!');
+const { value: sentiment } = await eval0('positive or negative?', 'I love it!');
 console.log(sentiment); // "positive"
 
 // Fast summaries (returns string)
-const { value: summary } = await eval0('Summarize in one word:', 'The quick brown fox jumps over the lazy dog');
-console.log(summary); // "agility"
+const content = 'The quick brown fox jumps over the lazy dog';
+const { value: summary } = await eval0('Summarize in one word', content);
 
-// Real-time streaming
-import { eval0 as streamEval0 } from 'eval0/stream';
-for await (const chunk of streamEval0('What is 2+2?')) {
-    process.stdout.write(chunk); // Streams: "4"
-}
+console.log(summary); // "agility"
 ```
 
 ### Advanced Usage with Schemas 🔒
@@ -57,27 +53,6 @@ for await (const chunk of streamEval0('What is 2+2?')) {
 ```typescript
 import { eval0 } from 'eval0';
 import { z } from 'zod';
-
-// Type-safe boolean checks
-const { value, metadata } = await eval0({
-    query: 'Is this a valid email?',
-    input: 'user@example.com',
-    schema: z.boolean()
-});
-if (value) {
-    console.log('Valid email!', metadata.latency + 'ms');
-}
-
-// Structured data extraction
-const { value: quote } = await eval0({
-    query: 'Give me a motivational quote with author',
-    schema: z.object({
-        quote: z.string(),
-        author: z.string(),
-        year: z.number().optional()
-    })
-});
-console.log(`${quote.quote} - ${quote.author}, ${quote.year || 'Unknown'}`);
 
 // Enum-based classification with confidence
 const { value: analysis } = await eval0({
@@ -89,6 +64,7 @@ const { value: analysis } = await eval0({
     }),
     temperature: 0.3
 });
+
 if (analysis.sentiment === 'positive' && analysis.confidence > 0.8) {
     console.log('High confidence positive feedback!');
 }
@@ -113,10 +89,14 @@ const { value: response } = await eval0({
 
 2. **Query with Options**
 ```typescript
-const { value: response } = await eval0(
-    'Your question here',
-    { schema: z.boolean() }
-);
+const { value: quote } = await eval0('a motivational quote', {
+    schema: z.object({
+        quote: z.string(),
+        author: z.string()
+    })
+});
+
+console.log(`${quote.quote} - ${quote.author}`);
 ```
 
 3. **Query, Input, and Options**
@@ -126,29 +106,6 @@ const { value: response } = await eval0(
     'Input data',
     { schema: z.boolean() }
 );
-```
-
-### Streaming Support
-
-For real-time responses, use the streaming version:
-
-```typescript
-import { eval0 } from 'eval0/stream';
-
-// Basic streaming
-for await (const chunk of eval0('What is the capital of France?')) {
-    process.stdout.write(chunk);
-}
-
-// With input
-for await (const chunk of eval0('Analyze:', 'Some text here')) {
-    process.stdout.write(chunk);
-}
-
-// With options
-for await (const chunk of eval0('Tell me a joke', { temperature: 0.8 })) {
-    process.stdout.write(chunk);
-}
 ```
 
 ### Type-Safe Responses
@@ -196,7 +153,6 @@ const { value: analysis } = await eval0({
 ## Response Structure
 
 ```typescript
-// Response type for regular eval0
 interface Eval0Response<T> {
     value: T;              // The typed response value based on schema
     metadata: {
@@ -207,10 +163,9 @@ interface Eval0Response<T> {
     };
 }
 
-// Stream response for eval0/stream
-for await (const chunk of streamEval0(...)) {
-    chunk: string;        // Text chunk from the stream
-}
+const { value } = await eval0<Eval0Response<string>>('positive or negative?', 'I love it!');
+console.log(value);
+
 ```
 
 ## Environment Variables
